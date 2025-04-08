@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Universe ✨</title>
+    <style>
+        :root {
+            --dark-blue: #0a1128;
+            --purple: #7b2cbf;
+            --light-purple: #c77dff;
+            --soft-blue: #5e60ce;
+            --light-blue: #64dfdf;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-blue);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Star background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--light-purple), var(--light-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(123, 44, 191, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #aaa;
+            margin-bottom: 2rem;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--purple), var(--soft-blue));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .dream-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .dream-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(123, 44, 191, 0.4);
+            border-color: rgba(123, 44, 191, 0.3);
+        }
+
+        .dream-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--light-purple);
+        }
+
+        .dream-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .dream-content {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 1.1rem;
+            color: var(--light-purple);
+        }
+
+        .form-group input, .form-group textarea {
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: #aaa;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        .library-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .library-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .library-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(123, 44, 191, 0.3);
+            border-color: rgba(123, 44, 191, 0.2);
+        }
+
+        .library-card-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--light-purple);
+        }
+
+        .library-card-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+
+        .library-card-content {
+            line-height: 1.5;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            flex-grow: 1;
+        }
+
+        .library-card-footer {
+            margin-top: 1rem;
+            text-align: right;
+        }
+
+        .view-btn {
+            color: var(--light-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .view-btn:hover {
+            text-decoration: underline;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #aaa;
+            margin: 4rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Star background -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Landing Page -->
+    <div id="landing-page" class="container">
+        <header>
+            <h1>Dream Universe ✨</h1>
+            <p class="subtitle">Share your dreams. Explore others. Connect through the subconscious.</p>
+        </header>
+
+        <div class="btn-container">
+            <button class="btn btn-primary" id="read-dream-btn">✨ Read My Dream</button>
+            <button class="btn btn-secondary" id="write-dream-btn">🌙 Write Your Dream</button>
+            <button class="btn btn-secondary" id="dream-library-btn">📚 Dream Library</button>
+        </div>
+    </div>
+
+    <!-- Read My Dream Page -->
+    <div id="read-dream-page" class="container hidden">
+        <a href="#" class="back-btn" id="back-from-read">← Back</a>
+
+        <div class="dream-card">
+            <h2 class="dream-title">Cuddling Dream ❤️</h2>
+            <div class="dream-meta">
+                <span>Aryan</span>
+                <span>A special night</span>
+            </div>
+            <div class="dream-content">
+                <p>I had a dream where she (you) and I were sleeping together, cuddling. You were patting my head gently and I was enjoying it so much. ❤️ In the morning, I was at my cousin's house. My 4-year-old cousin came and said 'Aryan bhaiya uth jao' (big brother, wake up). 😴</p>
+                <p>I woke up and realized someone was cuddling me — but it was my little cousin! 😅👨‍👩‍👧‍👦</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Write Your Dream Page -->
+    <div id="write-dream-page" class="container hidden">
+        <a href="#" class="back-btn" id="back-from-write">← Back</a>
+
+        <h2 class="dream-title">Write Your Dream 🌙</h2>
+
+        <form id="dream-form">
+            <div class="form-group">
+                <label for="dream-title">Dream Title</label>
+                <input type="text" id="dream-title" required placeholder="Give your dream a title...">
+            </div>
+
+            <div class="form-group">
+                <label for="dream-date">Date</label>
+                <input type="date" id="dream-date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dream-description">Dream Description</label>
+                <textarea id="dream-description" required placeholder="Tell us about your dream..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="dreamer-name">Dreamer's Name</label>
+                <input type="text" id="dreamer-name" required placeholder="Your name...">
+            </div>
+
+            <button type="submit" class="btn btn-primary">💫 Save Dream</button>
+        </form>
+    </div>
+
+    <!-- Dream Library Page -->
+    <div id="dream-library-page" class="container hidden">
+        <a href="#" class="back-btn" id="back-from-library">← Back</a>
+
+        <h2 class="dream-title">Dream Library 📚</h2>
+
+        <div id="dreams-container" class="library-grid"></div>
+
+        <div id="empty-message" class="empty-message hidden">
+            <p>No dreams found. Start by writing your first dream! ✨</p>
+        </div>
+    </div>
+
+    <script>
+        // Create star background
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 200;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+
+                // Random star properties
+                const size = Math.random() * 3 + 1;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${posX}%`;
+                star.style.top = `${posY}%`;
+                star.style.animationDelay = `${delay}s`;
+
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Navigation functions
+        function showPage(pageId) {
+            // Hide all pages
+            document.getElementById('landing-page').classList.add('hidden');
+            document.getElementById('read-dream-page').classList.add('hidden');
+            document.getElementById('write-dream-page').classList.add('hidden');
+            document.getElementById('dream-library-page').classList.add('hidden');
+
+            // Show selected page
+            document.getElementById(pageId).classList.remove('hidden');
+
+            // If showing library page, load dreams
+            if (pageId === 'dream-library-page') {
+                loadDreams();
+            }
+        }
+
+        // Dream handling functions
+        function saveDream(dream) {
+            // Get existing dreams
+            let dreams = JSON.parse(localStorage.getItem('dreams') || '[]');
+
+            // Add new dream
+            dreams.push(dream);
+
+            // Save to localStorage
+            localStorage.setItem('dreams', JSON.stringify(dreams));
+        }
+
+        function loadDreams() {
+            const dreamsContainer = document.getElementById('dreams-container');
+            const emptyMessage = document.getElementById('empty-message');
+
+            // Get dreams from localStorage
+            const dreams = JSON.parse(localStorage.getItem('dreams') || '[]');
+
+            // Clear container
+            dreamsContainer.innerHTML = '';
+
+            // Show empty message if no dreams
+            if (dreams.length === 0) {
+                emptyMessage.classList.remove('hidden');
+            } else {
+                emptyMessage.classList.add('hidden');
+
+                // Add dreams to container
+                dreams.forEach((dream, index) => {
+                    const dreamEl = document.createElement('div');
+                    dreamEl.classList.add('library-card');
+
+                    const formattedDate = new Date(dream.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+
+                    dreamEl.innerHTML = `
+                        <h3 class="library-card-title">${dream.title}</h3>
+                        <div class="library-card-meta">
+                            <span>${dream.dreamerName}</span>
+                            <span>${formattedDate}</span>
+                        </div>
+                        <div class="library-card-content">
+                            ${dream.description}
+                        </div>
+                        <div class="library-card-footer">
+                            <a href="#" class="view-btn" data-index="${index}">View full dream</a>
+                        </div>
+                    `;
+
+                    dreamsContainer.appendChild(dreamEl);
+                });
+
+                // Add click event to view buttons
+                document.querySelectorAll('.view-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const index = e.target.dataset.index;
+                        viewFullDream(index);
+                    });
+                });
+            }
+        }
+
+        function viewFullDream(index) {
+            // Get dreams from localStorage
+            const dreams = JSON.parse(localStorage.getItem('dreams') || '[]');
+            const dream = dreams[index];
+
+            if (!dream) return;
+
+            // Create a modal to view the full dream
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            modal.style.zIndex = '1000';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.padding = '2rem';
+
+            const formattedDate = new Date(dream.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+
+            const modalContent = document.createElement('div');
+            modalContent.style.width = '90%';
+            modalContent.style.maxWidth = '700px';
+            modalContent.style.maxHeight = '90vh';
+            modalContent.style.overflowY = 'auto';
+            modalContent.style.background = 'rgba(10, 17, 40, 0.95)';
+            modalContent.style.padding = '2rem';
+            modalContent.style.borderRadius = '15px';
+            modalContent.style.position = 'relative';
+
+            modalContent.innerHTML = `
+                <button class="close-btn" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">×</button>
+                <div class="dream-card" style="box-shadow: none; transform: none; margin: 0;">
+                    <h2 class="dream-title">${dream.title}</h2>
+                    <div class="dream-meta">
+                        <span>${dream.dreamerName}</span>
+                        <span>${formattedDate}</span>
+                    </div>
+                    <div class="dream-content">
+                        ${dream.description}
+                    </div>
+                </div>
+            `;
+
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+
+            // Close modal on button click
+            modal.querySelector('.close-btn').addEventListener('click', () => {
+                document.body.removeChild(modal);
+            });
+
+            // Close modal on background click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    document.body.removeChild(modal);
+                }
+            });
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', () => {
+            // Create stars
+            createStars();
+
+            // Set current date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('dream-date').value = today;
+
+            // Navigation event listeners
+            document.getElementById('read-dream-btn').addEventListener('click', () => showPage('read-dream-page'));
+            document.getElementById('write-dream-btn').addEventListener('click', () => showPage('write-dream-page'));
+            document.getElementById('dream-library-btn').addEventListener('click', () => showPage('dream-library-page'));
+
+            document.getElementById('back-from-read').addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage('landing-page');
+            });
+
+            document.getElementById('back-from-write').addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage('landing-page');
+            });
+
+            document.getElementById('back-from-library').addEventListener('click', (e) => {
+                e.preventDefault();
+                showPage('landing-page');
+            });
+
+            // Form submission
+            document.getElementById('dream-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const dream = {
+                    title: document.getElementById('dream-title').value,
+                    date: document.getElementById('dream-date').value,
+                    description: document.getElementById('dream-description').value,
+                    dreamerName: document.getElementById('dreamer-name').value
+                };
+
+                saveDream(dream);
+
+                // Reset form
+                document.getElementById('dream-form').reset();
+                document.getElementById('dream-date').value = today;
+
+                // Show confirmation and go to library
+                alert('Dream saved successfully! ✨');
+                showPage('dream-library-page');
+            });
+        });
+    </script>
+</body>
+</html>
